@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FulFilEdu AI | AsliddinWeb</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+  </head>
+
+  <body id="scrollBlock">
+    <!-- Navbar boshlandi -->
+    <nav>
+      <div class="container">
+        <div class="navbar">
+          <a href="{% url 'home_page' %}"><img src="{% static 'assets/images/logo.svg' %}" alt="logo" /></a>
+
+          <ul>
+            <li><a href="{% url 'home_page' %}">Asosiy</a></li>
+            <li><a href="{% url 'home_page' %}#why_course">Nega aynan biz?</a></li>
+            <li><a href="{% url 'home_page' %}#yana">Chegirma!</a></li>
+          </ul>
+          <div class="phone">
+            <img src="{% static './assets/images/phone_icon.png' %}" alt="phone" />
+            <div class="number">
+              <p>Telefon raqamimiz</p>
+              <h1>+{{ phone }}</h1>
+            </div>
+          </div>
+          <div class="navbtn">
+            <button class="btnbg" onclick="modalOpen(event)">
+              Qayta aloqa
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navbar tugadi -->
+
+    <main>
+      <!-- Hero section boshlandi -->
+
+      <section id="hero">
+        <div class="container-start">
+          <div class="hero-contents">
+            <div class="hero-first-content">
+              <h1 class="course-info">
+                {{ kurs_nomi | safe }}
+              </h1>
+              {% for i in kurs_afzalliklari %}
+                <div class="question-section">
+                <div class="span"><span class="undov">!</span></div>
+                <p class="question">{{ i.title }}</p>
+              </div>
+              {% endfor %}
+
+              <h2>Unda bu kursimiz siz uchun.</h2>
+              <p class="cashbac">
+                Kursga hoziroq ro’yxatdan o’ting va <br />
+                <span class="green"> chegirmaga </span>ega bo’ling!
+              </p>
+              <button class="btn" onclick="modalOpen(event)">
+                 Kursga yozilish
+              </button>
+            </div>
+            <div class="hero-second-content">
+              <div class="image-right">
+                <div class="ellepse-under">
+                  <div class="ellepse">
+                    <img src="{% static './assets/images/K3B1.png' %}" alt="human" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="lessons">
+                <div class="lesson">
+                  <h3>{{ darslar_soni }}</h3>
+                  <p>Darslar</p>
+                </div>
+                <div class="lesson">
+                  <h3>{{ vazifalar_soni }}</h3>
+                  <p>dan ortiq vazifalar</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hero section tugadi -->
+
+      <!-- Teacher section boshlandi -->
+
+      <section id="teacher">
+        <div class="container">
+          <div class="teacher-box">
+            <div class="teacher-img">
+              <img src="{{ teacher.photo.url }}" alt="" />
+            </div>
+            <div class="teacher-info">
+              <div class="text-info__top">
+                <p>Ustoz</p>
+              </div>
+              <div class="text-info__middle">
+                <p>{{ teacher.name | safe }}</p>
+              </div>
+              <div class="text-info__bottom">
+                {% for i in teacher_facts %}
+                  <div class="text-info__flex">
+                  <img src="{{ i.icon.url }}" alt="" />
+                  <p>{{ i.title }}</p>
+                </div>
+                {% endfor %}
+              </div>
+              <button class="btn" onclick="modalOpen(event)">
+                Kursga yozilish
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teacher section tugadi -->
+
+      <!-- For_whom section boshlandi -->
+
+      <section id="for_whom">
+        <div class="kurs_kimlar_uchun">
+          <div class="container">
+            <div class="for_whom_heading">
+              <h1>KURS <span class="green">KIMLAR UCHUN?</span></h1>
+            </div>
+            <div class="mini_sections">
+              {% for i in kimlar_uchun %}
+                <div class="for_whom_box">
+                <div class="for-whom-box-img">
+                  <div class="box_ellipse">
+                    <img src="{{ i.photo.url }}" alt="icon1" />
+                  </div>
+                </div>
+                <h2 class="for_whom_text">{{ i.title }}</h2>
+                <p class="info_text">
+                  {{ i.description }}
+                </p>
+              </div>
+              {% endfor %}
+
+            </div>
+            <div class="for_whom_btn">
+              <div class="butn">
+                <button class="btn" onclick="modalOpen(event)">
+                  Kursga yozilish
+                </button>
+              </div>
+              <p class="join_us">
+                Kursga hoziroq ro’yxatdan o’ting va<span class="green">
+                  chegirmaga </span
+                >ega bo’ling!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- For_whom section tugadi -->
+
+      <!-- About course section boshlandi -->
+
+      <section id="about_course">
+        <div class="container">
+          <h1 class="about_course_title">
+            Bu kursda nimalarni
+            <span class="green">o'rganamiz?</span>
+          </h1>
+          <div class="about_course_wrap">
+            <div class="left-wrap">
+            <div class="about_course_left_wrap">
+
+              <div class="about_course_left">
+                {% for i in learning_list_toq %}
+                    <div class="about_course_item">
+                        <h3 class="about_course_item_title">
+                          <span>{{ i.tartib_raqami }}</span>
+                          <span>{{ i.title }}</span>
+                        </h3>
+                        <p>{{ i.description }}</p>
+                    </div>
+                {% endfor %}
+              </div>
+              <div class="about_course_right">
+                {% for i in learning_list_juft %}
+                  <div class="about_course_item">
+                  <h3 class="about_course_item_title">
+                    <span>{{ i.tartib_raqami }}</span>
+                    {{ i.title }}
+                  </h3>
+                  <p>
+                    {{ i.description }}
+                  </p>
+                </div>
+                {% endfor %}
+
+              </div>
+              
+            </div>
+            <div class="about-course-confirm">
+              <div class="top-conf">
+                <div class="sp"><span class="undov">!</span></div><h3 class="h3">Kurs chet elning "AHA INC" kompaniyasida faoliyat yuritadigan
+                  tajribali Sun'iy intellekt mutaxassis tomonidan tayyorlangan</h3>
+              </div>
+              <button class="btn" onclick="modalOpen(event)">Kursga yozilish</button>
+            </div>
+          </div>
+            
+            <div class="about_course_right_wrap">
+             
+              <div class="ellipse-about">
+                <div class="ellipse-aboutbg"></div>
+                <img src="{% static './assets/images/about_course.png' %}" alt="Image" />
+              </div>
+             
+             
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- About course section tugadi -->
+
+      <!-- Course projects section boshlandi -->
+
+      <section id="course_projects">
+        <div class="container">
+          <div class="project-infos">
+            <div class="project-info-first">
+              <h1>
+                Kursda qanday <span class="green">loyihalarni bajaramiz?</span>
+              </h1>
+              <div class="ellipse-checklist">
+                <div class="imgcheck">
+                  <img src="{{ loyihalar.photo.url }}" alt="checklist" />
+                </div>
+              </div>
+            </div>
+            <div class="project-info-second">
+              {% for i in loyihalar_facts %}
+                <div class="list-titles">
+                <img src="{{ i.icon.url }}" alt="check" />
+                <p>
+                  {{ i.title | safe }}
+                </p>
+              </div>
+              {% endfor %}
+              <div class="list-finish">
+                <p>Imkoyniyatni boy bermang, xoziroq kursga yoziling!</p>
+                <button class="btn" onclick="modalOpen(event)">
+                  Kursga yozilish
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Course projects section tugadi -->
+
+      <!-- Feedback section boshlandi! -->
+
+      <section id="feedback">
+        <div class="container">
+          <div class="all-feedback">
+            <h1>Kursimiz haqida <span class="green"> izohlar</span></h1>
+            <div class="comments-first">
+              {% for i in feedbacks_toq %}
+                <div class="comment">
+                <div class="about-comment-user">
+                  <div class="comimg">
+                    <img src="{{ i.photo.url }}" alt="comUser" />
+                  </div>
+                  <div class="about-name">
+                    <h2>{{ i.title }}</h2>
+                    <p>{{ i.name }}</p>
+                  </div>
+                </div>
+                <p class="com">
+                  {{ i.description }}
+                </p>
+              </div>
+              {% endfor %}
+            </div>
+
+            <div class="comments-second">
+              {% for i in feedbacks_juft %}
+                <div class="comment">
+                <div class="about-comment-user">
+                  <div class="comimg">
+                    <img src="{{ i.photo.url }}" alt="comUser" />
+                  </div>
+                  <div class="about-name">
+                    <h2>{{ i.title }}</h2>
+                    <p>{{ i.name }}</p>
+                  </div>
+                </div>
+                <p class="com">
+                  {{ i.description }}
+                </p>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feedback section tugadi -->
+
+      <!-- Why_ai section boshlandi -->
+
+      <section id="why_ai">
+        <div class="container">
+          <div class="why-ai-first">
+            <div class="why-ai-reasons">
+                          {% for i in sabab_list %}
+              <div class="why-ai-reason">
+              <div class="why-ai-img">
+                <img src="{{ i.icon.url }}" alt="why-ai" />
+              </div>
+              <h2>{{ i.title }}</h2>
+              <p>
+                {{ i.description }}
+              </p>
+            </div>
+            {% endfor %}
+            </div>
+            <div class="why-ai-title">
+              <h1>
+                {{ sabab_title | safe }}
+              </h1>
+            </div>
+          </div>
+          <div class="why-ai-second">
+            {% for i in qulayliklar %}
+              <div class="why-ai-reason">
+              <div class="why-ai-img">
+                <img src="{{ i.icon.url }}" alt="why-ai" />
+              </div>
+              <h2>{{ i.title }}</h2>
+              <p>{{ i.description }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <!-- Why_ai section tugadi -->
+
+      <!-- Why_course section boshlandi! -->
+
+      <section id="why_course">
+        <div class="all-why-course">
+          <div class="container">
+            <h1>
+              Nega <span class="green">aynan bu kursda</span> o’qishim kerak?
+            </h1>
+            <div class="all-reasons">
+              {% for i in kurs_afzal_footer %}
+                <div class="reason">
+                <div class="rimg">
+                  <img src="{{ i.icon.url }}" alt="reasonImg" />
+                </div>
+                <h2>{{ i.title }}</h2>
+                <p>
+                  {{ i.description | safe }}
+                </p>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why_course section tugadi -->
+
+      <!-- Extra_chance section boshlandi -->
+      <div class="container" id="yana">
+      <div class="extra_chance_container">
+        <div class="extra_chance_left">
+          <div class="extra-change-underline">
+            <div class="extra-change-ellipse">
+              <img
+            src="{{ imkoniyat.photo.url }}"
+            alt="img"
+          />
+            </div>
+          </div>
+        </div>
+        <div class="extra_chance_right">
+          <h2 class="extra_chance_right_title">
+            YANA BIR
+            <span class="green">IMKONIYAT</span>
+          </h2>
+          <p class="extra_chance_right_text">
+            {{ imkoniyat.description | safe }}
+          </p>
+          <p class="extra_chance_right_text2">
+            {{ imkoniyat.narx }}
+          </p>
+          <button class="btn" onclick="modalOpen(event)">Kursga yozilish</button>
+        </div>
+      </div>
+    </div>
+      <!-- Extra_chance section tugadi -->
+
+      <!-- Apply section boshlandi -->
+<div class="container">
+      <div class="apply-section-container" id="apply">
+        <div class="apply-section-left">
+          <h1 class="apply-section-left-title">
+            <span class="apply-section-left-title-green">KURS VA USTOZ</span>
+            HAQIDA XULOSA CHIQARMOQCHIMISIZ?
+          </h1>
+          <p class="apply-section-left-text">
+            Unda bizning <b>3ta bir haftalik bepul darsimizga </b> hoziroq
+            ro’yxatdan o’ting va kurs bo’yicha xulosa chiqaring!
+          </p>
+          <div class="apply-section-varning-container">
+            <img src="{% static './assets/images/varning.svg' %}" alt="img" />
+            <b class="apply-section-varning-text"
+              >Diqqat! Joylar chegaralangan!</b
+            >
+          </div>
+          <form class="apply-section-form" method="post">
+            {% csrf_token %}
+            <input type="text" name="firstname" placeholder="Ism Familiyangiz" required />
+            <input type="tel" name="phone" placeholder="Telefon raqamingiz" required />
+            <input type="text" name="telegram" placeholder="Telegram username" required />
+            <button id="btn-modal" class="btn" type="submit">
+              Bir haftalik bepul darsga qatnashish
+            </button>
+          </form>
+        </div>
+        <div class="apply-section-right">
+          <img
+            src="{% static './assets/images/hand.png' %}"
+            alt="img"
+          />
+        </div>
+      </div>
+    </div>
+      <!-- Apply section tugadi -->
+    </main>
+
+    <!-- Footer boshlandi -->
+
+    <footer>
+      <div class="footer">
+        <h1>Ful Fil education 2022</h1>
+      </div>
+    </footer>
+
+    <!-- Footer tugadi -->
+
+    <!-- Modallar boshlandi -->
+    <div id="apply_modal" class="test">
+      <div class="overlay" id="overlay"></div>
+      <div class="modal-conteiner">
+        <div class="modal" id="modal">
+          <button class="modal-close-btn" id="close-btn">X</button>
+          <div class="apply-section-container1">
+            <div class="apply-section-left1">
+              <h1 class="apply-section-left-title1">
+                240 SOATLIK PROFESSIONAL <span class="green">PYTHON</span> VA
+                <span class="green">SUN'IY INTELLEKT KURSIGA</span> YOZILISH
+              </h1>
+
+              <form class="apply-section-form-modal" method="POST">
+                {% csrf_token %}
+                <input
+                  type="text"
+                  name="firstname"
+                  placeholder="Ism familiyangiz"
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Telefon raqamingiz"
+                  required
+                />
+                <input
+                  type="text"
+                  name="telegram"
+                  placeholder="Telegram username"
+                  required
+                />
+                <button type="submit" class="btn">Kursga yozilish</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="confirm_modal" class="is-visible">
+          <div id="all-confirm" class="modal">
+            <div class="img-confirm">
+              <div class="img-ellips-comfirm">
+                <img src="{% static './assets/images/confirm.svg' %}" alt="confirm" />
+              </div>
+            </div>
+            <h1>
+              So’rovingiz <br />
+              <span class="green">muvaffaqiyatli yuborildi!</span>
+            </h1>
+            <p>
+              Operatorlar tez orada siz bilan aloqaga <br />
+              chiqishadi, salomat bo’ling!
+            </p>
+            <button id="confermed" class="btn-confermed">Tushunarli</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="up_btn">
+      <a href="#">
+        <img
+          class="down-arrow"
+          src="{% static './assets/images/down-arrow.png' %}"
+          alt="UP button"
+        />
+      </a>
+    </div>
+
+    <!-- Modallar tugadi -->
+    <script src="{% static 'main.js' %}"></script>
+  </body>
+</html>
