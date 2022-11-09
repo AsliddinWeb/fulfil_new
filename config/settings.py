@@ -89,8 +89,8 @@ DATABASES = {
         'NAME': 'fulfil_new',
         'USER': 'root',
         'PASSWORD': 'AC0802306suhrob',
-        'HOST': '167.172.129.187',
-        'PORT': '1771',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -130,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR.joinpath('static')]
+STATICFILES_DIRS = [BASE_DIR.joinpath('static_files')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # MEDIA
