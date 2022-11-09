@@ -86,9 +86,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fulfil_ai',
-        'USER': 'asliddin',
-        'PASSWORD': 'test',
+        'NAME': 'fulfil_new',
+        'USER': 'root',
+        'PASSWORD': 'AC0802306suhrob',
         'HOST': '167.172.129.187',
         'PORT': '1771',
     }
