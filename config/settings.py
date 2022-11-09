@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-82belokxa!mapu!q05@v!=a9u#ot#(bzaic1fc**)+w=gxq4j(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'www.fulfiledu.pythonanywhere.com', 'fulfiledu.pythonanywhere.com']
+ALLOWED_HOSTS = ['167.172.129.187', '.fulfil.uz']
 
 
 # Application definition
@@ -76,10 +76,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'fulfil_ai',
+        'USER': 'asliddin',
+        'PASSWORD': 'test',
+        'HOST': '167.172.129.187',
+        'PORT': '1771',
     }
 }
 
@@ -120,6 +131,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR.joinpath('static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # MEDIA
 MEDIA_URL = '/media/'
